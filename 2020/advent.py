@@ -25,4 +25,4 @@ class Advent:
                     idx_paragraph += 1
                     self.paragraphs.append([])
         else:
-            self.lines = test.splitlines()
+            self.lines = [int(e) if e.isnumeric() else e for e in test.splitlines()]
