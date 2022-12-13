@@ -1,6 +1,8 @@
 from advent import Advent
 import enum
 
+advent = Advent(2022, 2)
+
 class HandType(enum.Enum):
     Rock = 1
     Paper = 2
@@ -35,8 +37,6 @@ class Hand():
         if self.players_hand[pi] == HandType.Paper and self.players_hand[not pi] == HandType.Rock: game_score = Hand.WON_SCORE
         if self.players_hand[pi] == HandType.Scissors and self.players_hand[not pi] == HandType.Paper: game_score = Hand.WON_SCORE
         return score_hand + game_score
-
-advent = Advent(2022, 2)
 
 # part 1
 my_score = 0

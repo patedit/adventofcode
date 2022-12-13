@@ -39,7 +39,6 @@ packets.extend([DIVIDER_1, DIVIDER_2])
 
 packets = sorted(packets, key=cmp_to_key(compare), reverse=True)
 
-divider_indice_1, divider__indice_2 = [i + 1 for i in range(len(packets)) if packets[i] in [DIVIDER_1, DIVIDER_2]]
+divider_indice_1, divider_indice_2 = [i + 1 for i in range(len(packets)) if packets[i] in [DIVIDER_1, DIVIDER_2]]
 
-print(divider_indice_1 * divider__indice_2)
-
+print(divider_indice_1 * divider_indice_2)

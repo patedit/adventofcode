@@ -34,7 +34,8 @@ class Advent:
         if test:
             lines_to_read = test
         elif use_file:
-            input_file_path = os.path.join(advent_dir, '{}/in/q{}.in'.format(self.year, self.day))
+            day_in_name = self.day if self.day < 10 else '0' + str(self.day)
+            input_file_path = os.path.join(advent_dir, '{}/in/{}.in'.format(self.year, day_in_name))
             f = open(input_file_path, 'r')
             lines_to_read = f.read()
         else:
