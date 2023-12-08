@@ -42,6 +42,8 @@ def part1_dfs(r):
         part1_dfs(r[dir])
 
 part1_dfs(disk["/"])
+import json
+print(json.dumps(disk, indent=4))
 
 print(total_size)
 
