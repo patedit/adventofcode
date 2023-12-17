@@ -20,7 +20,7 @@ class Advent:
                 line = line.decode('utf-8')
             except Exception: pass
             if line != '':
-                if line.isnumeric() and line[0] != '0': line = int(line)
+                # if line.isnumeric() and line[0] != '0': line = int(line)
                 self.lines.append(line)
                 self.paragraphs[idx_paragraph].append(line)
             else:
