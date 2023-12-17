@@ -18,9 +18,8 @@ print(min(seeds))
 # Part 2
 seeds = [int(s) for s in advent.paragraphs[0][0].split(': ')[1].split(' ')]
 seeds_ranges = [(int(seeds[s]), int(seeds[s]) + int(seeds[s + 1]) - 1) for s in range(0, len(seeds), 2)]
-# print(seeds)
-
 pos_ranges = []
+
 for j in range(len(seeds_ranges)):
     something = [seeds_ranges[j]]
     candidates = set(list(something))

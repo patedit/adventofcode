@@ -3,6 +3,7 @@ import math
 
 advent = Advent(2023, 8, use_file=False)
 
+# Part 1
 sequence = [str(l) for l in advent.paragraphs[0][0]]
 MAP = {}
 for line in advent.paragraphs[1]:

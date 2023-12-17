@@ -61,6 +61,7 @@ print(total)
 
 # Part 2
 from collections import deque
+# TODO: Best is to check hand and check if the number of J can make a better hand using results from check_hand
 def generate_combinations(s):
     queue = deque([s])
     result = []
