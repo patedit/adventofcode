@@ -13,21 +13,21 @@ class Advent:
     lines = []
     paragraphs = [[]]
 
-    def _read_lines(self, lines):
+    def _read_lines(self, lines, cast=True):
         idx_paragraph = 0
         for line in lines:
             try:
                 line = line.decode('utf-8')
             except Exception: pass
             if line != '':
-                # if line.isnumeric() and line[0] != '0': line = int(line)
+                if line.isnumeric() and cast: line = int(line)
                 self.lines.append(line)
                 self.paragraphs[idx_paragraph].append(line)
             else:
                 idx_paragraph += 1
                 self.paragraphs.append([])
 
-    def __init__(self, year, day, test=None, use_file=False):
+    def __init__(self, year, day, test=None, use_file=False, cast=True):
         self.year = year
         self.day = day
         lines_to_read = None
@@ -48,4 +48,4 @@ class Advent:
 
             lines_to_read = response.read()
         
-        self._read_lines(lines_to_read.splitlines())
+        self._read_lines(lines_to_read.splitlines(), cast)

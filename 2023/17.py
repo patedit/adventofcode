@@ -1,7 +1,7 @@
 from advent import Advent
 import heapq
 
-advent = Advent(2023, 17, use_file=False)
+advent = Advent(2023, 17, cast=False)
 
 M, N = len(advent.lines), len(advent.lines[0])
 
@@ -10,6 +10,13 @@ class Direction:
     RIGHT = (0, 1)
     UP = (-1, 0)
     DOWN = (1, 0)
+
+BLOCKED_DIRS = set([
+    (Direction.UP, Direction.DOWN),
+    (Direction.DOWN, Direction.UP),
+    (Direction.LEFT, Direction.RIGHT),
+    (Direction.RIGHT, Direction.LEFT),
+])
 
 def min_heat(min_count=1, max_count=3):
     q = [
@@ -29,39 +36,21 @@ def min_heat(min_count=1, max_count=3):
         if (x, y) == (M - 1, N - 1) and count >= min_count:
             return heat
 
-        next_dirs = []
-        for pos_d in [Direction.LEFT, Direction.RIGHT, Direction.UP, Direction.DOWN]:
-            if d == pos_d:
-                if count < max_count:
-                    next_dirs.append(pos_d)
-            elif pos_d == Direction.UP and d == Direction.DOWN:
-                continue
-            elif pos_d == Direction.DOWN and d == Direction.UP:
-                continue
-            elif pos_d == Direction.LEFT and d == Direction.RIGHT:
-                continue
-            elif pos_d == Direction.RIGHT and d == Direction.LEFT:
-                continue
-            else:
-                next_dirs.append(pos_d)
+        for next_pos_dir in [Direction.LEFT, Direction.RIGHT, Direction.UP, Direction.DOWN]:
+            if d == next_pos_dir and count >= max_count: continue
+            if d != next_pos_dir and count < min_count: continue
+            if (d, next_pos_dir) in BLOCKED_DIRS: continue
 
-        for next_direction in next_dirs:
-            if next_direction == d:
-                next_count = count + 1
-            elif count >= min_count:
-                next_count = 1
-            else: continue
-            next_x = x + next_direction[0]
-            next_y = y + next_direction[1]
+            next_x = x + next_pos_dir[0]
+            next_y = y + next_pos_dir[1]
             if next_x < 0 or next_y < 0 or next_x >= M or next_y >= N:
                 continue
+            next_count = (count + 1) if next_pos_dir == d else 1
             next_heat = heat + int(advent.lines[next_x][next_y])
-            heapq.heappush(q, (next_heat, (next_x, next_y, next_direction, next_count)))
+
+            heapq.heappush(q, (next_heat, (next_x, next_y, next_pos_dir, next_count)))
 
     return -1
-import time
-start_time = time.time()
+
 print(min_heat(min_count=1, max_count=3))
 print(min_heat(min_count=4, max_count=10))
-end_time = time.time()
-print(end_time - start_time)
