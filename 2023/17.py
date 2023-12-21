@@ -20,7 +20,7 @@ BLOCKED_DIRS = set([
 
 def min_heat(min_count=1, max_count=3):
     q = [
-        (0, (0, 0, Direction.RIGHT, 0)), # (heap, (x, y, diretion, count)))
+        (0, (0, 0, Direction.RIGHT, 0)), # (heat, (x, y, direction, count)))
         (0, (0, 0, Direction.DOWN, 0)),
     ]
     heapq.heapify(q)
